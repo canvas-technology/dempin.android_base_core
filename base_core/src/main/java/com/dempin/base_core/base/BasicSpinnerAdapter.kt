@@ -20,13 +20,13 @@ abstract class BasicSpinnerAdapter<T> :BaseSpinnerAdapter<T,ItemBasicSpinnerBind
     }
 
     override fun onDropDownViewSetModel(binding: ItemBasicSpinnerBinding, item: T, position: Int) {
-        onSetModel(binding, item, position)
+        binding.textView.text = getText(item)
     }
 
     override fun onViewSetModel(binding: ItemBasicSpinnerBinding, item: T, position: Int) {
-        onSetModel(binding, item, position)
+       binding.textView.text = getText(item)
     }
 
-    protected abstract fun onSetModel(binding: ItemBasicSpinnerBinding,item: T,position: Int)
+    protected abstract fun getText(item: T):String
 
 }
