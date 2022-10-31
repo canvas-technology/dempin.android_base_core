@@ -1,6 +1,7 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -8,13 +9,9 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.dempin.base_core"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -39,6 +36,7 @@ android {
 }
 
 dependencies {
+
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
