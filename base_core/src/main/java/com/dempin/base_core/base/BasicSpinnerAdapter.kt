@@ -18,4 +18,15 @@ abstract class BasicSpinnerAdapter<T> :BaseSpinnerAdapter<T,ItemBasicSpinnerBind
     ): ItemBasicSpinnerBinding {
         return ItemBasicSpinnerBinding.inflate(layoutInflater,parent,false)
     }
+
+    override fun onDropDownViewSetModel(binding: ItemBasicSpinnerBinding, item: T, position: Int) {
+        onSetModel(binding, item, position)
+    }
+
+    override fun onViewSetModel(binding: ItemBasicSpinnerBinding, item: T, position: Int) {
+        onSetModel(binding, item, position)
+    }
+
+    protected abstract fun onSetModel(binding: ItemBasicSpinnerBinding,item: T,position: Int)
+
 }
