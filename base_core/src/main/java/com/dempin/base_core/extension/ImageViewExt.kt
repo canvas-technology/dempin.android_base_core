@@ -9,6 +9,11 @@ fun AppCompatImageView.loadImage(path:String){
     Glide.with(this).load(path).into(this)
 }
 
+fun AppCompatImageView.loadImage(baseUrl:String,path:String){
+    val url = "$baseUrl$path"
+    Glide.with(this).load(url).into(this)
+}
+
 fun ImageView.loadImage(resourceId: Int) {
     Glide.with(this)
         .load(resourceId)
