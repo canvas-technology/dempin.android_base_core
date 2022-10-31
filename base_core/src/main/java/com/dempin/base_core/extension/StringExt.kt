@@ -1,4 +1,4 @@
-package com.canvas.demin.pos.extension
+package com.dempin.base_core.extension
 
 import android.annotation.SuppressLint
 import android.text.Html
@@ -10,7 +10,6 @@ fun String?.ignoreNull(defaultValue: String = ""): String = this ?: defaultValue
 fun String?.toSpanned(): Spanned {
     return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
 }
-
 
 fun String?.getFormattedMoney(): String {
     return try {

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.canvas.demin.pos.dialog.LoadingDialog
+import com.dempin.base_core.dialog.LoadingDialog
 
 abstract class BaseActivityWithViewModel<DB : ViewDataBinding, VM : ViewModel>
     (private val viewModelClass: Class<VM>) : AppCompatActivity() {
@@ -29,6 +29,10 @@ abstract class BaseActivityWithViewModel<DB : ViewDataBinding, VM : ViewModel>
 
     protected fun showLoading() {
         loadingDialog?.show()
+    }
+
+    protected fun showLoading(message:String){
+        loadingDialog?.show(message)
     }
 
     protected fun dismissLoading() {

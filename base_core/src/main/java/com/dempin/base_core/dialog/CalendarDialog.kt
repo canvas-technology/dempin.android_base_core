@@ -1,4 +1,4 @@
-package com.canvas.demin.pos.dialog
+package com.dempin.base_core.dialog
 
 import android.app.Activity
 import android.app.DatePickerDialog

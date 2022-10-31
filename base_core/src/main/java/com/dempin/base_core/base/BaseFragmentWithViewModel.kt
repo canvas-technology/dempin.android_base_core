@@ -9,7 +9,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.canvas.demin.pos.dialog.LoadingDialog
+import com.dempin.base_core.dialog.LoadingDialog
 
 abstract class BaseFragmentWithViewModel<DB : ViewDataBinding, VM : ViewModel>
     (private val viewModelClass: Class<VM>) : Fragment() {

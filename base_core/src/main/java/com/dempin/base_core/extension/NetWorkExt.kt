@@ -1,9 +1,9 @@
 package com.dempin.base_core.extension
 
-import com.canvas.demin.pos.model.ApiErrorResponse
-import com.canvas.demin.pos.model.ApiResponse
-import com.canvas.demin.pos.model.BaseResponse
-import com.canvas.demin.pos.model.Status
+import com.dempin.base_core.model.ApiErrorResponse
+import com.dempin.base_core.model.ApiResponse
+import com.dempin.base_core.model.BaseResponse
+import com.dempin.base_core.model.Status
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

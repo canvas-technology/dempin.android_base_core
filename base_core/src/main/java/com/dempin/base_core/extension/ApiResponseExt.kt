@@ -1,10 +1,10 @@
 package com.dempin.base_core.extension
 
-
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
-import com.canvas.demin.pos.model.ApiResponse
-import com.canvas.demin.pos.model.Status
+import com.dempin.base_core.model.ApiResponse
+import com.dempin.base_core.model.Status
+
 
 fun <T> ApiResponse<T>.handleWithErrorView(
     errorTextView: AppCompatTextView,

@@ -18,5 +18,13 @@
         <item name="android:windowExitAnimation">@anim/anim_out</item>
     </style>
 
+    <style name="TextRegular">
+        <item name="android:fontFamily">@font/ubuntu_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <style name="TextRegular.16dp" parent="TextRegular">
+        <item name="android:textSize">16dp</item>
+    </style>
 
 </resources>
