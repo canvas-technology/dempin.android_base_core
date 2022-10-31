@@ -10,14 +10,16 @@ import androidx.databinding.ViewDataBinding
 
 abstract class BaseDialog<VDB : ViewDataBinding>(activity: Activity) : Dialog(activity) {
 
-    protected lateinit var binding: VDB
+    protected var binding: VDB? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inflater = LayoutInflater.from(context)
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding = getViewDataBinding(inflater)
-        setContentView(binding.root)
+        binding?.root?.let {
+            setContentView(it)
+        }
     }
 
     protected abstract fun getViewDataBinding(layoutInflater: LayoutInflater): VDB

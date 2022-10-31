@@ -9,27 +9,34 @@ import com.dempin.base_core.R
 import com.dempin.base_core.base.BaseDialog
 import com.dempin.base_core.databinding.DialogLoadingBinding
 
-class LoadingDialog(private val activity:Activity) : BaseDialog<DialogLoadingBinding>(activity) {
+class LoadingDialog(private val activity: Activity) : BaseDialog<DialogLoadingBinding>(activity) {
+
+    private var message: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setCancelable(false)
-        Glide.with(activity).load(R.drawable.loading).into(binding.imageView)
+        binding?.imageView?.let {
+            Glide.with(activity).load(R.drawable.loading).into(it)
+        }
+        if(message.isNotEmpty()){
+            binding?.textView?.visibility = View.VISIBLE
+            binding?.textView?.text = message
+        }
     }
 
     override fun getViewDataBinding(layoutInflater: LayoutInflater): DialogLoadingBinding {
         return DialogLoadingBinding.inflate(layoutInflater)
     }
 
-    fun show(message:String){
-        binding.textView.visibility = View.VISIBLE
-        binding.textView.text = message
+    fun show(message: String) {
+        this.message = message
         show()
     }
 
     override fun dismiss() {
-        binding.textView.visibility = View.GONE
-        binding.textView.text = ""
+        message = ""
         super.dismiss()
     }
+
 }
