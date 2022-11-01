@@ -1,8 +1,13 @@
 package com.dempin.base_core.base
 
+import android.content.Intent
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.pm.PackageInfoCompat
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -22,7 +27,7 @@ abstract class BaseActivityWithViewModel<DB : ViewDataBinding, VM : ViewModel>
         super.onCreate(savedInstanceState)
         binding = getViewBinding(LayoutInflater.from(this))
         setContentView(binding.root)
-        loadingDialog = LoadingDialog( this)
+        loadingDialog = LoadingDialog(this)
     }
 
     protected abstract fun getViewBinding(inflater: LayoutInflater): DB
@@ -31,12 +36,39 @@ abstract class BaseActivityWithViewModel<DB : ViewDataBinding, VM : ViewModel>
         loadingDialog?.show()
     }
 
-    protected fun showLoading(message:String){
+    protected fun showLoading(message: String) {
         loadingDialog?.show(message)
     }
 
     protected fun dismissLoading() {
         loadingDialog?.dismiss()
+    }
+
+
+    protected fun startActivity(cls:Class<*>){
+        val intent = Intent(this,cls)
+        startActivity(intent)
+    }
+
+    protected fun startActivity(cls:Class<*>,bundle: Bundle){
+        val intent = Intent(this,cls)
+        intent.putExtras(bundle)
+        startActivity(intent)
+    }
+
+    fun getVersionNameWithCode():String {
+        val packageInfo = getPackageInfo()
+        val versionCode = PackageInfoCompat.getLongVersionCode(packageInfo)
+        val versionName = packageInfo.versionName
+        return "$versionName ($versionCode)"
+    }
+
+    private fun getPackageInfo(): PackageInfo {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0))
+        } else {
+            packageManager.getPackageInfo(packageName, 0)
+        }
     }
 
     override fun onDestroy() {
