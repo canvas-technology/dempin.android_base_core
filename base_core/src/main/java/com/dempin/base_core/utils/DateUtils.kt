@@ -14,13 +14,26 @@ object DateUtils {
         return sdf.format(Date())
     }
 
-
     @SuppressLint("SimpleDateFormat")
     fun getFormattedDate(date:Date):String{
-        val sdf = SimpleDateFormat("yyyy-MM-dd")
-        return sdf.format(date)
+        return try {
+            val sdf = SimpleDateFormat("yyyy-MM-dd")
+            sdf.format(date)
+        }catch (ex:Exception){
+            ""
+        }
     }
 
+
+    @SuppressLint("SimpleDateFormat")
+    fun getFormattedDate(date:Date,format:String):String{
+        return try{
+            val sdf = SimpleDateFormat(format)
+            sdf.format(date)
+        }catch (ex:Exception){
+            ""
+        }
+    }
 
     fun getCurrentDateForCalendar():Long{
         return System.currentTimeMillis() - THOUSAND_MILLIS

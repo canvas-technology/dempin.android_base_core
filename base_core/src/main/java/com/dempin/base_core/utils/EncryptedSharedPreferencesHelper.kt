@@ -1,5 +1,6 @@
 package com.dempin.base_core.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
@@ -74,10 +75,10 @@ class EncryptedSharedPreferencesHelper(context: Context) {
     fun getDouble(key: String, defaultValue: Double = 0.0): Double =
         encryptedSharedPreferences.getFloat(key, defaultValue.toFloat()).toDouble()
 
+    @SuppressLint("CommitPrefEdits")
     fun clear(){
         val editor = encryptedSharedPreferences.edit()
         editor.clear()
-        editor.apply()
     }
 
     companion object {
