@@ -1,6 +1,6 @@
 # dempin.android_base_core
 
-# imlementation
+*  imlementation
 
 
 allprojects {
