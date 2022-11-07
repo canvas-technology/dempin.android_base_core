@@ -1,5 +1,25 @@
 # dempin.android_base_core
 
+# imlementation
+
+
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+ 
+ 
+
+dependencies {
+	        implementation 'com.github.canvas-technology:dempin.android_base_core:VersionName'
+	}
+ 
+
+########
+
+
 * Canvas altında yazılacak tüm android projeleri için bu kütüphane baz alınması için yazılmıştır.
 
 * Base * 
