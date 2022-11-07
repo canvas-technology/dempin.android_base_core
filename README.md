@@ -3,7 +3,7 @@
 # Setup
 
 
-allprojects {
+	allprojects {
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
@@ -12,7 +12,7 @@ allprojects {
  
  
 
-dependencies {
+	dependencies {
 	        implementation 'com.github.canvas-technology:dempin.android_base_core:VersionName'
 	}
  
