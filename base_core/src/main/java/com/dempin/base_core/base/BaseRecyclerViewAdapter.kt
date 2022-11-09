@@ -38,6 +38,7 @@ abstract class BaseRecyclerViewAdapter<T, VDB : ViewDataBinding>
     }
 
     fun getItems():List<T> = items
+    fun clearItems() = items.clear()
 
     class ViewHolder(
         val itemBinding : ViewDataBinding
