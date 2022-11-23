@@ -79,6 +79,7 @@ class EncryptedSharedPreferencesHelper(context: Context) {
     fun clear(){
         val editor = encryptedSharedPreferences.edit()
         editor.clear()
+        editor.commit()
     }
 
     companion object {
