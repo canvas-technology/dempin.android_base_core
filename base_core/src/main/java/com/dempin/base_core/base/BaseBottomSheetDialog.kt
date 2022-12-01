@@ -5,16 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.ViewDataBinding
 import com.dempin.base_core.R
+import com.dempin.base_core.extension.ignoreNull
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseBottomSheetDialog<VDB : ViewDataBinding> : BottomSheetDialogFragment() {
+abstract class BaseBottomSheetDialog<VDB : ViewDataBinding>(private var isFull: Boolean? = false) :
+    BottomSheetDialogFragment() {
 
     protected lateinit var binding: VDB
 
@@ -34,6 +37,9 @@ abstract class BaseBottomSheetDialog<VDB : ViewDataBinding> : BottomSheetDialogF
             dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)?.let {
                 val behavior = BottomSheetBehavior.from(it)
                 behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                if(isFull.ignoreNull()){
+                    setupFullHeight(it)
+                }
                 behavior.skipCollapsed = true
                 behavior.setHideable(true)
             }
@@ -51,6 +57,12 @@ abstract class BaseBottomSheetDialog<VDB : ViewDataBinding> : BottomSheetDialogF
                 insets
             }
         }
+    }
+
+    private fun setupFullHeight(bottomSheet: View) {
+        val layoutParams = bottomSheet.layoutParams
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT
+        bottomSheet.layoutParams = layoutParams
     }
 
     override fun getTheme() = R.style.CustomBottomSheetDialogTheme
