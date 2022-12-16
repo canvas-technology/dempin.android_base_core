@@ -40,7 +40,15 @@ fun <T> Response<T>.handleResponse(): Flow<ApiResponse<T>> =
                                 errorResponse.message ?: ""
                             )
                         )
-                    } else {
+                    }else if(response.code() == Status.ERROR_RE_LOGIN.type){
+                        emit(
+                            ApiResponse(
+                                null,
+                                Status.ERROR_RE_LOGIN,
+                                errorResponse.message ?: ""
+                            )
+                        )
+                    }else {
                         emit(ApiResponse(null, Status.ERROR, errorResponse.message ?: ""))
                     }
                 } catch (ex: Exception) {
