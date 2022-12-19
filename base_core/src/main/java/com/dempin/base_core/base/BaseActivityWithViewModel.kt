@@ -12,6 +12,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dempin.base_core.dialog.LoadingDialog
+import com.dempin.base_core.utils.EncryptedSharedPreferencesHelper
+import kotlin.system.exitProcess
 
 abstract class BaseActivityWithViewModel<DB : ViewDataBinding, VM : ViewModel>
     (private val viewModelClass: Class<VM>) : AppCompatActivity() {
@@ -45,18 +47,18 @@ abstract class BaseActivityWithViewModel<DB : ViewDataBinding, VM : ViewModel>
     }
 
 
-    protected fun startActivity(cls:Class<*>){
-        val intent = Intent(this,cls)
+    protected fun startActivity(cls: Class<*>) {
+        val intent = Intent(this, cls)
         startActivity(intent)
     }
 
-    protected fun startActivity(cls:Class<*>,bundle: Bundle){
-        val intent = Intent(this,cls)
+    protected fun startActivity(cls: Class<*>, bundle: Bundle) {
+        val intent = Intent(this, cls)
         intent.putExtras(bundle)
         startActivity(intent)
     }
 
-    fun getVersionNameWithCode():String {
+    fun getVersionNameWithCode(): String {
         val packageInfo = getPackageInfo()
         val versionCode = PackageInfoCompat.getLongVersionCode(packageInfo)
         val versionName = packageInfo.versionName
@@ -71,9 +73,25 @@ abstract class BaseActivityWithViewModel<DB : ViewDataBinding, VM : ViewModel>
         }
     }
 
+
+    private fun logout(
+        activityClass: Class<*>,
+        sharedPreferencesHelper: EncryptedSharedPreferencesHelper
+    ) {
+        sharedPreferencesHelper.clear()
+        val intent = Intent(this, activityClass).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        startActivity(intent)
+        finishAffinity()
+        exitProcess(0)
+    }
+
+
     override fun onDestroy() {
         super.onDestroy()
         loadingDialog?.dismiss()
         loadingDialog = null
     }
+
 }
