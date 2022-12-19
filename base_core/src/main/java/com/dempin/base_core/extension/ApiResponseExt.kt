@@ -35,7 +35,7 @@ fun <T> ApiResponse<T>.handleWithErrorView(
     }
 }
 
-fun <T> ApiResponse<T>.handleWithErrorViewWithReLoginError(
+fun <T> ApiResponse<T>.handleWithErrorViewAndReLoginError(
     errorTextView: AppCompatTextView,
     mainView: View? = null,
     successCallBack: (T) -> Unit,
@@ -66,6 +66,27 @@ fun <T> ApiResponse<T>.handleWithErrorViewWithReLoginError(
             errorTextView.visibility = View.VISIBLE
             mainView?.visibility = View.GONE
         }
+    }
+}
+
+fun <T> ApiResponse<T>.handleWithErrorAndReLoginError(
+    successCallBack: (T) -> Unit,
+    errorCallBack: (String) -> Unit,
+    errorReLoginCallBack: () -> Unit
+) {
+    when (this.status) {
+        Status.SUCCESS -> {
+            if (this.data != null) {
+                successCallBack.invoke(this.data)
+            }
+        }
+        Status.ERROR -> {
+            errorCallBack.invoke(this.errMessage.ignoreNull())
+        }
+        Status.ERROR_RE_LOGIN->{
+            errorReLoginCallBack.invoke()
+        }
+        else -> return
     }
 }
 

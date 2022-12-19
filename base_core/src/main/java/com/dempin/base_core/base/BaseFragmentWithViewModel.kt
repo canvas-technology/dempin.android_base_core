@@ -66,7 +66,7 @@ abstract class BaseFragmentWithViewModel<DB : ViewDataBinding, VM : ViewModel>
         }
     }
 
-    private fun logout(
+    protected fun logout(
         activityClass: Class<*>,
         sharedPreferencesHelper: EncryptedSharedPreferencesHelper
     ) {
