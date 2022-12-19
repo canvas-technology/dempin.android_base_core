@@ -1,5 +1,6 @@
 package com.dempin.base_core.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dempin.base_core.dialog.LoadingDialog
+import com.dempin.base_core.utils.EncryptedSharedPreferencesHelper
+import kotlin.system.exitProcess
 
 abstract class BaseFragmentWithViewModel<DB : ViewDataBinding, VM : ViewModel>
     (private val viewModelClass: Class<VM>) : Fragment() {
@@ -61,6 +64,19 @@ abstract class BaseFragmentWithViewModel<DB : ViewDataBinding, VM : ViewModel>
         activity?.runOnUiThread {
             loadingDialog?.dismiss()
         }
+    }
+
+    private fun logout(
+        activityClass: Class<*>,
+        sharedPreferencesHelper: EncryptedSharedPreferencesHelper
+    ) {
+        sharedPreferencesHelper.clear()
+        val intent = Intent(activity, activityClass).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        startActivity(intent)
+        activity?.finishAffinity()
+        exitProcess(0)
     }
 
 }
